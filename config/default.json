@@ -1,0 +1,14 @@
+{
+    "http": {
+        "port": 8080,
+        "timeout": 10000
+    },
+    "logging": {
+        "name": "shareable-asset api",
+        "console": true,
+        "firehose": false
+    },
+    "cluster": {
+        "size": 5
+    }
+}

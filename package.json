@@ -1,0 +1,50 @@
+{
+  "name": "shareable-asset api",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "clean": "rm -rf build",
+    "lint": "tslint --force --format verbose \"src/**/*.ts\"",
+    "build": "npm run clean && npm run lint && tsc",
+    "build:tests": "rm -rf test/build && tsc -p test/",
+    "test": "npm run build:tests && nyc ava --verbose test/build/test",
+    "start": "node ./build/cluster.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "nyc": {
+    "include": [
+      "test/**"
+    ],
+    "exclude": [
+      "test/build/test/**"
+    ],
+    "reporter": [
+      "json",
+      "text",
+      "lcovonly"
+    ],
+    "require": [
+      "babel-register"
+    ],
+    "produce-source-map": true,
+    "all": true
+  },
+  "devDependencies": {
+    "@types/config": "0.0.33",
+    "ava": "0.24.0",
+    "babel-register": "6.26.0",
+    "nyc": "11.4.1",
+    "tslint": "5.9.1",
+    "typescript": "2.6.2"
+  },
+  "dependencies": {
+    "@eight/eight-rest": "0.2.4",
+    "@eight/practices": "4.2.6"
+  }
+}

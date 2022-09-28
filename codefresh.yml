@@ -1,0 +1,47 @@
+version: '1.0'
+steps:
+  eight_docker_clone:
+    type: git-clone
+    description: "cloning eight-docker"
+    repo: https://5bb633a07e62ccdc3dc26ddfe43c1efdd5f52d93@github.com/lunasleep/eight-docker.git
+    revision: master
+  build_dockerhub:
+    type: build
+    image_name: eightsleep/${{CF_REPO_NAME}}
+  Unit_tests:
+    working_directory: IMAGE_WORK_DIR
+    image: ${{build_dockerhub}}
+    environment:
+      - 'AWS_SECRET_ACCESS_KEY=${{AWS_SECRET_ACCESS_KEY}}'
+      - 'AWS_ACCESS_KEY_ID=${{AWS_ACCESS_KEY_ID}}'
+    commands:
+      - npm test
+
+  dockerhub_push_step:
+    type: push
+    description: push to dockerhub
+    candidate: ${{build_dockerhub}}
+    tag: ${{CF_REVISION}}
+
+  ecr_push_step:
+    type: push
+    description: push to ecr
+    candidate: ${{build_dockerhub}}
+    tag: ${{CF_REVISION}}
+    registry: "ecr-us-east"
+    image_name: "eight/${{CF_REPO_NAME}}"
+
+  deploy_service:
+    image: 'python:2.7'
+    working_directory: ${{eight_docker_clone}}
+    environment:
+      - 'AWS_SECRET_ACCESS_KEY=${{AWS_SECRET_ACCESS_KEY}}'
+      - 'AWS_ACCESS_KEY_ID=${{AWS_ACCESS_KEY_ID}}'
+
+    commands:
+      - pip install boto3
+      - python scripts/deployment/update_task_definition.py ${{CF_REPO_NAME}}$DOCKER_REPO_SUFFIX ${{CF_REVISION}}
+    when:
+      branch:
+        only:
+          - staging
