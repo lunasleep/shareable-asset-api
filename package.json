@@ -3,19 +3,13 @@
   "version": "0.0.0",
   "description": "",
   "main": "build/server.js",
-  "private": true,
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "clean": "rm -rf build",
     "build": "npm run clean && tsc",
     "build:tests": "rm -rf test/build && tsc -p test/",
     "start": "node build/server.js",
     "test": "npm run build:tests && nyc ava --verbose test/build/test/*_test.js"
-},
-  "author": "",
-  "license": "ISC",
+  },
   "nyc": {
     "exclude": [
         "build/**",
@@ -27,7 +21,7 @@
         "text"
     ],
     "all": true
-},
+  },
   "devDependencies": {
     "@types/config": "3.3.0",
     "ava": "4.3.3",
