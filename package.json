@@ -44,8 +44,10 @@
     "typescript": "^3.9.10"
   },
   "dependencies": {
-    "@eight/eight-rest": "0.2.4",
-    "@eight/practices": "4.2.6",
+    "@eight/eight-rest": "0.3.3",
+    "@eight/logging": "1.4.0",
+    "@eight/practices": "6.22.12",
+    "@eight/promises": "1.1.1",
     "canvas": "^2.10.1"
   }
 }

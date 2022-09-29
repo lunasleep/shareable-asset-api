@@ -1,12 +1,5 @@
 {
-    "http": {
-        "port": 8080,
-        "timeout": 10000
-    },
-    "logging": {
-        "name": "shareable-asset-api"
-    },
-    "cluster": {
-        "size": 5
-    }
+    "logging": { "name": "shareable-asset-api" },
+    "port": 6556,
+    "cluster": {"size": 5}
 }

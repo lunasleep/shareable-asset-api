@@ -1,6 +1,9 @@
 import * as fs from "fs";
 import { createCanvas, loadImage, registerFont, CanvasRenderingContext2D, Image } from "canvas";
 
+registerFont("assets/bold.otf", {family: "AKG-Bold"});
+registerFont("assets/regular.otf", {family: "AKG-Regular"});
+
 const SCALE = 1;
 const BASE_WIDTH = 1080;
 const BASE_HEIGHT = 1080;
@@ -188,13 +191,13 @@ function drawTempGraph(ctx: CanvasRenderingContext2D, temps: number[]) {
     }
 }
 
-const createShareable = async (date: Date, score: number, temps: number[]) => {
+export const createShareable = async (date: Date, score: number, temps: number[]) => {
     const canvas = createCanvas(W, H);
-    registerFont("../assets/bold.otf", {family: "AKG-Bold"});
-    registerFont("../assets/regular.otf", {family: "AKG-Regular"});
     const ctx = canvas.getContext("2d");
-    const bg = await loadImage("../assets/bgasset.jpg");
-    const logo = await loadImage("../assets/8.png");
+
+    const bg = await loadImage("assets/bgasset.jpg");
+    const logo = await loadImage("assets/8.png");
+
     ctx.drawImage(bg, 0, 0, W, H);
 
     drawProgress(ctx, score);
@@ -202,20 +205,18 @@ const createShareable = async (date: Date, score: number, temps: number[]) => {
     drawLogo(ctx, logo);
     drawTempGraph(ctx, temps);
 
-    const image = canvas.toDataURL("image/jpeg");
+    // const image = canvas.toDataURL("image/jpeg");
 
-    const data = image.replace(/^data:image\/\w+;base64,/, "");
-    const buf = Buffer.from(data, "base64");
-    fs.writeFile("image.jpeg", buf, () => {
-    });
+    // const data = image.replace(/^data:image\/\w+;base64,/, "");
+    // const buf = Buffer.from(data, "base64");
+    // fs.writeFile("image.jpeg", buf, () => {
+    // });
 
     return {
         statusCode: 200,
-        body: image,
+        raw: canvas.toBuffer("image/jpeg"),
         headers: {
             "Content-Type": "image/jpeg"
         }
     };
 };
-
-createShareable(new Date(), 98, [2, 4, -3, 1]).then();
