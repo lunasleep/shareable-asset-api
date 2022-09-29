@@ -12,13 +12,14 @@
   },
   "nyc": {
     "exclude": [
-        "build/**",
-        "test/build/test/**",
-        "**/*.d.ts"
+      "build/**",
+      "cdk/**",
+      "test/build/test/**",
+      "**/*.d.ts"
     ],
     "reporter": [
-        "json",
-        "text"
+      "json",
+      "text"
     ],
     "all": true
   },

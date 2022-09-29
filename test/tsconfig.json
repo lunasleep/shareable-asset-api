@@ -1,16 +1,11 @@
 {
+    "extends": "../tsconfig.json",
     "compilerOptions": {
-        "declaration": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
+        "sourceMap": false,
         "inlineSourceMap": true,
-        "lib": [ "es2018" ],
         "module": "commonjs",
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
         "outDir": "./build/",
-        "strict": true,
-        "target": "es2018"
+        "rootDir": "../"
     },
     "include": [
         "../src",
