@@ -4,13 +4,13 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "inlineSourceMap": true,
-        "lib": [ "es2017", "esnext.asynciterable", "dom" ],
+        "lib": [ "es2018" ],
         "module": "commonjs",
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "outDir": "./build/",
         "strict": true,
-        "target": "es2017"
+        "target": "es2018"
     },
     "include": [
         "../src",
