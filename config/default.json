@@ -4,9 +4,7 @@
         "timeout": 10000
     },
     "logging": {
-        "name": "shareable-asset api",
-        "console": true,
-        "firehose": false
+        "name": "shareable-asset-api"
     },
     "cluster": {
         "size": 5

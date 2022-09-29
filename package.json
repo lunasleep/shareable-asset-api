@@ -1,5 +1,5 @@
 {
-  "name": "shareable-asset api",
+  "name": "shareable-asset-api",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
@@ -13,7 +13,7 @@
     "build": "npm run clean && npm run lint && tsc",
     "build:tests": "rm -rf test/build && tsc -p test/",
     "test": "npm run build:tests && nyc ava --verbose test/build/test",
-    "start": "node ./build/cluster.js"
+    "start": "node ./build/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -41,10 +41,11 @@
     "babel-register": "6.26.0",
     "nyc": "11.4.1",
     "tslint": "5.9.1",
-    "typescript": "2.6.2"
+    "typescript": "^3.9.10"
   },
   "dependencies": {
     "@eight/eight-rest": "0.2.4",
-    "@eight/practices": "4.2.6"
+    "@eight/practices": "4.2.6",
+    "canvas": "^2.10.1"
   }
 }
