@@ -17,6 +17,7 @@ const staging = new SharableAssetApiStack(app, `staging-${serviceName}`, {
   memLimitHardMB: 2048,
   memLimitSoftMB: 1024,
   cpuUnits: 1024,
+  internetFacing: true,
   // Only set ecrLabel directly if you want to keep a revision that is not current or latest
   // ecrLabel: "900f457753bbaa1ff426d44364dac6b0c4504b0a",
 });
@@ -30,6 +31,7 @@ const production = new SharableAssetApiStack(app, `production-${serviceName}`, {
   memLimitHardMB: 2048,
   memLimitSoftMB: 1024,
   cpuUnits: 1024,
+  internetFacing: true,
   // Only set ecrLabel directly if you want to keep a revision that is not current or latest
   // ecrLabel: "900f457753bbaa1ff426d44364dac6b0c4504b0a",
 });

@@ -1,5 +1,5 @@
 {
     "logging": { "name": "shareable-asset-api" },
-    "port": 6556,
-    "cluster": {"size": 5}
+    "port": 8080,
+    "cluster": {"size": 1}
 }
