@@ -118,7 +118,7 @@ function drawTempGraph(ctx: CanvasRenderingContext2D, temps: number[]) {
     const points = [];
 
     for (let i = 0; i < temps.length; i++) {
-        const temp = temps[i];
+        const temp = clamp(temps[i], -10, 10);
         const NUDGE = 2 * temp * SCALE;
         const x = ((i + 1) / (temps.length + 1)) * (endX - startX) + padding;
         const y = 840 * SCALE - NUDGE;
@@ -200,8 +200,8 @@ export const createShareable = async (date: Date, score: number, temps: number[]
 
     ctx.drawImage(bg, 0, 0, W, H);
 
-    drawProgress(ctx, score);
-    drawText(ctx, date, score);
+    drawProgress(ctx, clamp(score, 0, 100));
+    drawText(ctx, date, clamp(score, 0, 100));
     drawLogo(ctx, logo);
     drawTempGraph(ctx, temps);
 
@@ -214,3 +214,5 @@ export const createShareable = async (date: Date, score: number, temps: number[]
 
     return canvas.toBuffer("image/jpeg");
 };
+
+const clamp = (number: number, min: number, max: number) => Math.max(min, Math.min(number, max));
