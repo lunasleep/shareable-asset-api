@@ -16,6 +16,7 @@ export class SharableAssetApiStack extends Stack {
       memLimitSoftMB: props.memLimitSoftMB,
       cpuUnits: props.cpuUnits,
       ecrLabel: props.ecrLabel,
+      ecsCluster: props.ecsCluster,
       internetFacing: props.internetFacing,
     });
   }
