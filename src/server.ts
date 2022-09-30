@@ -4,7 +4,7 @@ import * as express from "express";
 import { action, controller, expressRouter } from "@eight/eight-rest";
 import { EightController } from "@eight/practices";
 import { DummyLogger, Logger, Logging } from "@eight/logging";
-import { ShareableController } from "./controllers/shareable_controller"; 
+import { createShareable } from "./lib/generator";
 
 @controller("")
 class RootController extends EightController {
@@ -18,10 +18,25 @@ export function createExpressApp(logger: Logger = new DummyLogger()) {
     const router = express.Router();
 
     router.use(expressRouter(RootController, () => new RootController(logger)));
-    router.use(expressRouter(ShareableController, () => new ShareableController(logger)));
 
     const app = express();
     app.use("/v1", router);
+    app.get("/shareable/:date/:score/:temps", async (req, res) => {
+        const _date = new Date(req.params.date);
+        const _score = parseInt(req.params.score);
+        const _temps = req.params.temps.split(",").map(a => parseInt(a));
+
+        const shareable = await createShareable(_date, _score, _temps);
+
+        res.writeHead(
+            200,
+            {
+                "Content-Type": "image/jpeg",
+            }
+        );
+
+        res.end(shareable);
+    });
     app.set("etag", false);
     return app;
 }

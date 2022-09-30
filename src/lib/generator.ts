@@ -212,11 +212,5 @@ export const createShareable = async (date: Date, score: number, temps: number[]
     // fs.writeFile("image.jpeg", buf, () => {
     // });
 
-    return {
-        statusCode: 200,
-        raw: canvas.toBuffer("image/jpeg"),
-        headers: {
-            "Content-Type": "image/jpeg"
-        }
-    };
+    return canvas.toBuffer("image/jpeg");
 };
