@@ -51,14 +51,8 @@ export function createExpressApp(logger: Logger = new DummyLogger()) {
 
         const shareable = await createShareable(_date, _score, _temps);
 
-        res.writeHead(
-            200,
-            {
-                "Content-Type": "image/jpeg",
-            }
-        );
+        res.send(shareable);
 
-        res.end(shareable);
     });
     app.set("etag", false);
     return app;

@@ -1,5 +1,4 @@
-import * as fs from "fs";
-import { createCanvas, loadImage, registerFont, CanvasRenderingContext2D, Image } from "canvas";
+import { CanvasRenderingContext2D, createCanvas, Image, loadImage, registerFont } from "canvas";
 
 registerFont("assets/bold.otf", {family: "AKG-Bold"});
 registerFont("assets/regular.otf", {family: "AKG-Regular"});
@@ -205,14 +204,12 @@ export const createShareable = async (date: Date, score: number, temps: number[]
     drawLogo(ctx, logo);
     drawTempGraph(ctx, temps);
 
-    // const image = canvas.toDataURL("image/jpeg");
-
     // const data = image.replace(/^data:image\/\w+;base64,/, "");
     // const buf = Buffer.from(data, "base64");
     // fs.writeFile("image.jpeg", buf, () => {
     // });
 
-    return canvas.toBuffer("image/jpeg");
+    return canvas.toDataURL("image/jpeg");
 };
 
 const clamp = (number: number, min: number, max: number) => Math.max(min, Math.min(number, max));
