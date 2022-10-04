@@ -49,9 +49,7 @@ export function createExpressApp(logger: Logger = new DummyLogger()) {
             return;
         }
 
-        const shareable = await createShareable(_date, _score, _temps);
-
-        res.send(shareable);
+        res.send(await createShareable(_date, _score, _temps));
 
     });
     app.set("etag", false);

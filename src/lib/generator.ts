@@ -209,7 +209,9 @@ export const createShareable = async (date: Date, score: number, temps: number[]
     // fs.writeFile("image.jpeg", buf, () => {
     // });
 
-    return canvas.toDataURL("image/jpeg");
+    return {
+        dataURL: canvas.toDataURL("image/jpeg")
+    };
 };
 
 const clamp = (number: number, min: number, max: number) => Math.max(min, Math.min(number, max));
