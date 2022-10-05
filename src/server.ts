@@ -5,6 +5,7 @@ import { action, controller, expressRouter } from "@eight/eight-rest";
 import { EightController } from "@eight/practices";
 import { DummyLogger, Logger, Logging } from "@eight/logging";
 import { createShareable } from "./lib/generator";
+import { ShareableController } from "./controllers/shareable_controller";
 
 @controller("")
 class RootController extends EightController {
@@ -18,40 +19,41 @@ export function createExpressApp(logger: Logger = new DummyLogger()) {
     const router = express.Router();
 
     router.use(expressRouter(RootController, () => new RootController(logger)));
+    router.use(expressRouter(ShareableController, () => new ShareableController(logger)));
 
     const app = express();
     app.use("/v1", router);
-    app.get("/v1/shareable/", async (req, res) => {
-        const date = req.query.date as string;
-        const score = req.query.score as string;
-        const temps = req.query.temps as string;
-
-        const _date = new Date(date);
-        const _score = parseInt(score);
-        const _temps = temps.split(",").map(a => parseInt(a));
-
-        let hasNaN = false;
-        for (const temp of _temps) {
-            if (isNaN(temp)) {
-                hasNaN = true;
-                break;
-            }
-        }
-
-        if (_date.toString() === "Invalid Date" || isNaN(_score) || !_temps.length || hasNaN) {
-            res.writeHead(
-                500,
-                {
-                    "Content-Type": "html/text",
-                }
-            );
-            res.end();
-            return;
-        }
-
-        res.send(await createShareable(_date, _score, _temps));
-
-    });
+    // app.get("/v1/shareable/", async (req, res) => {
+    //     const date = req.query.date as string;
+    //     const score = req.query.score as string;
+    //     const temps = req.query.temps as string;
+    //
+    //     const _date = new Date(date);
+    //     const _score = parseInt(score);
+    //     const _temps = temps.split(",").map(a => parseInt(a));
+    //
+    //     let hasNaN = false;
+    //     for (const temp of _temps) {
+    //         if (isNaN(temp)) {
+    //             hasNaN = true;
+    //             break;
+    //         }
+    //     }
+    //
+    //     if (_date.toString() === "Invalid Date" || isNaN(_score) || !_temps.length || hasNaN) {
+    //         res.writeHead(
+    //             500,
+    //             {
+    //                 "Content-Type": "html/text",
+    //             }
+    //         );
+    //         res.end();
+    //         return;
+    //     }
+    //
+    //     res.send(await createShareable(_date, _score, _temps));
+    //
+    // });
     app.set("etag", false);
     return app;
 }

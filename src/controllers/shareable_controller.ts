@@ -11,12 +11,25 @@ export class ShareableController extends EightController {
         @query("date", joi.date())
         date: Date,
         @query("score", joi.number())
-        score: number, 
+        score: number,
         @query("temps", joi.string())
         temps: string) {
         const integer_temps = temps.split(",").map(a => parseInt(a));
         this.logger.info({date: date}, "creating shareable resource");
-        const shearable = await createShareable(date, score, integer_temps);
-        return shearable;
+
+        let hasNaN = false;
+        for (const temp of integer_temps) {
+            if (isNaN(temp)) {
+                hasNaN = true;
+                break;
+            }
+        }
+
+        if (date.toString() === "Invalid Date" || isNaN(score) || !integer_temps.length || hasNaN) {
+            this.logger.child({ date, score, temps }).warn("Malformed request");
+            return undefined;
+        }
+
+        return await createShareable(date, score, integer_temps);
     }
 }
