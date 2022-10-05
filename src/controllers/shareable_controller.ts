@@ -1,4 +1,4 @@
-import { action, controller, query } from "@eight/eight-rest";
+import { action, BadRequest, controller, query } from "@eight/eight-rest";
 import * as joi from "types-joi";
 import { EightController } from "@eight/practices";
 import { createShareable } from "../lib/generator";
@@ -27,7 +27,7 @@ export class ShareableController extends EightController {
 
         if (!integer_temps.length || hasNaN) {
             this.logger.child({ date, score, temps }).warn("Bad temps string");
-            throw new Error();
+            throw new BadRequest("Malformed Temperature String");
         }
 
         return await createShareable(date, score, integer_temps);
