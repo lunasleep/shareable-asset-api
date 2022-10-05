@@ -25,9 +25,9 @@ export class ShareableController extends EightController {
             }
         }
 
-        if (date.toString() === "Invalid Date" || isNaN(score) || !integer_temps.length || hasNaN) {
-            this.logger.child({ date, score, temps }).warn("Malformed request");
-            return undefined;
+        if (!integer_temps.length || hasNaN) {
+            this.logger.child({ date, score, temps }).warn("Bad temps string");
+            throw new Error();
         }
 
         return await createShareable(date, score, integer_temps);
