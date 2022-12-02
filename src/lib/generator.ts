@@ -1,4 +1,4 @@
-import { CanvasRenderingContext2D, createCanvas, Image, loadImage, registerFont } from "canvas";
+import { Canvas, CanvasRenderingContext2D, createCanvas, Image, loadImage, registerFont } from "canvas";
 
 registerFont("assets/bold.otf", {family: "AKG-Bold"});
 registerFont("assets/regular.otf", {family: "AKG-Regular"});
@@ -72,9 +72,6 @@ function drawText(ctx: CanvasRenderingContext2D, date: Date, score: number) {
     ctx.restore();
 }
 
-function drawLogo(ctx: CanvasRenderingContext2D, logo: Image) {
-    ctx.drawImage(logo, W - 102 * SCALE, 52 * SCALE, 54 * SCALE, 71 * SCALE);
-}
 
 const temperatures = [
     "#1862FF", // -10
@@ -190,27 +187,31 @@ function drawTempGraph(ctx: CanvasRenderingContext2D, temps: number[]) {
     }
 }
 
+let bg: Image;
+let logo: Image;
+let bgCanvas: Canvas;
+
 export const createShareable = async (date: Date, score: number, temps: number[]) => {
     const canvas = createCanvas(W, H);
     const ctx = canvas.getContext("2d");
 
-    const bg = await loadImage("assets/bgasset.jpg");
-    const logo = await loadImage("assets/8.png");
+    if (!bg) {
+        bg = await loadImage("assets/bgasset.jpg");
+        logo = await loadImage("assets/8.png");
+        bgCanvas = createCanvas(W, H);
+        const _ctx = bgCanvas.getContext("2d");
+        _ctx.drawImage(bg, 0, 0, W, H);
+        _ctx.drawImage(logo, W - 102 * SCALE, 52 * SCALE, 54 * SCALE, 71 * SCALE);
+    }
 
-    ctx.drawImage(bg, 0, 0, W, H);
+    ctx.drawImage(bgCanvas, 0, 0);
 
     drawProgress(ctx, clamp(score, 0, 100));
     drawText(ctx, date, clamp(score, 0, 100));
-    drawLogo(ctx, logo);
     drawTempGraph(ctx, temps);
 
-    // const data = image.replace(/^data:image\/\w+;base64,/, "");
-    // const buf = Buffer.from(data, "base64");
-    // fs.writeFile("image.jpeg", buf, () => {
-    // });
-
     return {
-        dataURL: canvas.toDataURL("image/jpeg")
+        dataURL: canvas.toDataURL("image/jpeg"),
     };
 };
 
