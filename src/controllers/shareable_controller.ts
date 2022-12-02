@@ -40,7 +40,7 @@ export class ShareableController extends EightController {
         @query("type", joi.string()) type: string,
         @body body: any) {
 
-        return JSON.stringify(body);
+        return body;
 
         // const data = body.resData.value;
         //
