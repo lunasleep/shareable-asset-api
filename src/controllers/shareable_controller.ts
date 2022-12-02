@@ -40,7 +40,7 @@ export class ShareableController extends EightController {
         @query("type", joi.string()) type: string,
         @body body: any) {
 
-        const data = body.resData.value;
+        const data = JSON.parse(body).resData.value;
 
         if (type === "avatar") {
             return await createEOYAvatarShareable(data);
