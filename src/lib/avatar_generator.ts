@@ -16,14 +16,14 @@ const images: { cosmic: Image | undefined; deep: Image | undefined; spacewalker:
 };
 
 const initImages = async () => {
-    images.cosmic = await loadImage("assets/avatars/cosmic_star.jpg");
-    images.deep = await loadImage("assets/avatars/deep_dreamer.jpg");
-    images.galaxy = await loadImage("assets/avatars/galaxy_great.jpg");
-    images.ice = await loadImage("assets/avatars/ice_nebula.jpg");
-    images.newmoon = await loadImage("assets/avatars/new_moon.jpg");
-    images.nobuzz = await loadImage("assets/avatars/no_buzz_aldrin.jpg");
+    images.cosmic = await loadImage("assets/avatars/cosmic.jpg");
+    images.deep = await loadImage("assets/avatars/deep.jpg");
+    images.galaxy = await loadImage("assets/avatars/galaxy.jpg");
+    images.ice = await loadImage("assets/avatars/ice.jpg");
+    images.newmoon = await loadImage("assets/avatars/new.jpg");
+    images.nobuzz = await loadImage("assets/avatars/no.jpg");
     images.spacewalker = await loadImage("assets/avatars/spacewalker.jpg");
-    images.stellar = await loadImage("assets/avatars/stellar_sleeper.jpg");
+    images.stellar = await loadImage("assets/avatars/stellar.jpg");
     images.supernova = await loadImage("assets/avatars/supernova.jpg");
 };
 

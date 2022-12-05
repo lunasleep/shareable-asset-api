@@ -17,15 +17,15 @@ const images: { cosmic: Image | undefined; deep: Image | undefined; spacewalker:
 };
 
 const initImages = async () => {
-    images.cosmic = await loadImage("assets/avatars/cosmic_star.jpg");
-    images.deep = await loadImage("assets/avatars/deep_dreamer.jpg");
-    images.galaxy = await loadImage("assets/avatars/galaxy_great.jpg");
-    images.ice = await loadImage("assets/avatars/ice_nebula.jpg");
-    images.newmoon = await loadImage("assets/avatars/new_moon.jpg");
-    images.nobuzz = await loadImage("assets/avatars/no_buzz_aldrin.jpg");
-    images.spacewalker = await loadImage("assets/avatars/spacewalker.jpg");
-    images.stellar = await loadImage("assets/avatars/stellar_sleeper.jpg");
-    images.supernova = await loadImage("assets/avatars/supernova.jpg");
+    images.cosmic = await loadImage("assets/recaps/cosmic.jpg");
+    images.deep = await loadImage("assets/recaps/deep.jpg");
+    images.galaxy = await loadImage("assets/recaps/galaxy.jpg");
+    images.ice = await loadImage("assets/recaps/ice.jpg");
+    images.newmoon = await loadImage("assets/recaps/new.jpg");
+    images.nobuzz = await loadImage("assets/recaps/no.jpg");
+    images.spacewalker = await loadImage("assets/recaps/spacewalker.jpg");
+    images.stellar = await loadImage("assets/recaps/stellar.jpg");
+    images.supernova = await loadImage("assets/recaps/supernova.jpg");
 };
 
 const getImage = (avatarName: string) => {
