@@ -1,11 +1,14 @@
-require("@eight/logging/enable-tracing");
+import fetch from "node-fetch";
 import * as config from "config";
 import * as express from "express";
 import { action, controller, expressRouter } from "@eight/eight-rest";
 import { EightController } from "@eight/practices";
 import { DummyLogger, Logger, Logging } from "@eight/logging";
-import { createShareable } from "./lib/generator";
 import { ShareableController } from "./controllers/shareable_controller";
+import { createEOYAvatarShareable } from "./lib/avatar_generator";
+import { createEOYRecapShareable } from "./lib/recap_generator";
+
+require("@eight/logging/enable-tracing");
 
 @controller("")
 class RootController extends EightController {
@@ -20,6 +23,29 @@ export function createExpressApp(logger: Logger = new DummyLogger()) {
 
     router.use(expressRouter(RootController, () => new RootController(logger)));
     router.use(expressRouter(ShareableController, () => new ShareableController(logger)));
+
+    router.use(express.text());
+    router.post("/shareable", async (req, res) => {
+
+        const body = JSON.parse(req.body);
+        let resData = body.resData;
+
+        if (!resData || !resData.Avatar) {
+            resData = await fetch(`https://i.eight.sl/eoy-lifeboat?uid=${body.userData.userId}`).then((r: { json: () => any; }) => r.json());
+        }
+
+        const avatar = resData.Avatar;
+
+        const type = req.query.type;
+        let response: {};
+        if (type === "avatar") {
+            response = await createEOYAvatarShareable(avatar);
+        } else {
+            response = await createEOYRecapShareable(avatar);
+        }
+
+        res.send(response);
+    });
 
     const app = express();
     app.use("/v1", router);
