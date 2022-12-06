@@ -44,27 +44,27 @@ export class ShareableController extends EightController {
 
         return JSON.parse(body);
 
-        if (!body || !body.userData) {
-            throw new Error();
-        }
-
-        return body;
-
-        let resData = body.resData;
-
-        if (!resData) {
-            resData = await fetch(`https://i.eight.sl/eoy-lifeboat?uid=${body.userData.userId}`).then((r: { json: () => any; }) => r.json());
-        }
-
-        const avatar = resData.avatar;
-
-
+        // if (!body || !body.userData) {
+        //     throw new Error();
+        // }
+        //
+        // return body;
+        //
+        // let resData = body.resData;
+        //
+        // if (!resData) {
+        //     resData = await fetch(`https://i.eight.sl/eoy-lifeboat?uid=${body.userData.userId}`).then((r: { json: () => any; }) => r.json());
+        // }
+        //
+        // const avatar = resData.avatar;
 
 
-        if (type === "avatar") {
-            return await createEOYAvatarShareable(avatar);
-        } else {
-            return await createEOYRecapShareable(avatar);
-        }
+
+        //
+        // if (type === "avatar") {
+        //     return await createEOYAvatarShareable(avatar);
+        // } else {
+        //     return await createEOYRecapShareable(avatar);
+        // }
     }
 }
