@@ -42,6 +42,8 @@ export class ShareableController extends EightController {
         @query("type", joi.string()) type: string,
         @body body: any) {
 
+        return body;
+
         let resData = body.resData;
 
         if (!resData) {
@@ -50,7 +52,7 @@ export class ShareableController extends EightController {
 
         const avatar = resData.avatar;
 
-        return resData;
+
 
 
         if (type === "avatar") {
