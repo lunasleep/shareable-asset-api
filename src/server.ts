@@ -27,9 +27,7 @@ export function createExpressApp(logger: Logger = new DummyLogger()) {
     router.use(express.text());
     router.post("/shareable", async (req, res) => {
 
-        res.send(req.body);
-        return;
-        const body = JSON.parse(req.body);
+        const body = JSON.parse(JSON.parse(req.body));
         let resData = body.resData;
 
         if (!resData || !resData.Avatar) {
