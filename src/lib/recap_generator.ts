@@ -51,7 +51,7 @@ const getImage = (avatarName: string) => {
     return images.spacewalker;
 };
 
-export const createEOYRecapShareable =  async (data: any) => {
+export const createEOYRecapShareable =  async (avatar: string) => {
     const canvas = createCanvas(W, H);
     const ctx = canvas.getContext("2d");
 
@@ -59,7 +59,7 @@ export const createEOYRecapShareable =  async (data: any) => {
         await initImages();
     }
 
-    ctx.drawImage(getImage(data.avatar), 0, 0, W, H);
+    ctx.drawImage(getImage(avatar), 0, 0, W, H);
 
     return {
         dataURL: canvas.toDataURL("image/jpeg"),

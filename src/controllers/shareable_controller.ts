@@ -4,6 +4,8 @@ import { EightController } from "@eight/practices";
 import { createShareable } from "../lib/generator";
 import { createEOYAvatarShareable } from "../lib/avatar_generator";
 import { createEOYRecapShareable } from "../lib/recap_generator";
+import fetch from "node-fetch";
+
 
 
 @controller("/shareable")
@@ -40,17 +42,19 @@ export class ShareableController extends EightController {
         @query("type", joi.string()) type: string,
         @body body: any) {
 
-        if (!body || !body.resData || !body.resData.value) {
-            return "";
+        let resData = body.resData;
+
+        if (!resData) {
+            resData = await fetch(`https://i.eight.sl/eoy-lifeboat?uid=${body.userData.userId}`).then((r: { json: () => any; }) => r.json());
         }
 
-        const data = body.resData.value;
+        const avatar = resData.avatar;
 
 
         if (type === "avatar") {
-            return await createEOYAvatarShareable(data);
+            return await createEOYAvatarShareable(avatar);
         } else {
-            return await createEOYRecapShareable(data);
+            return await createEOYRecapShareable(avatar);
         }
     }
 }

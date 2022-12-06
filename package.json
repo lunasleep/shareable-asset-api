@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@types/config": "3.3.0",
+    "@types/node-fetch": "^2.6.2",
     "ava": "4.3.3",
     "babel-register": "6.26.0",
     "nyc": "15.1.0",
@@ -37,6 +38,7 @@
     "@eight/practices": "6.22.20",
     "@eight/promises": "1.1.1",
     "canvas": "^2.10.1",
+    "node-fetch": "2.6.1",
     "types-joi": "2.1.0"
   }
 }

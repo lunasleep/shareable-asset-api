@@ -51,7 +51,7 @@ const getImage = (avatarName: string) => {
 };
 
 
-export const createEOYAvatarShareable =  async (data: any) => {
+export const createEOYAvatarShareable =  async (avatar: string) => {
     const canvas = createCanvas(W, H);
     const ctx = canvas.getContext("2d");
 
@@ -59,7 +59,7 @@ export const createEOYAvatarShareable =  async (data: any) => {
         await initImages();
     }
 
-    ctx.drawImage(getImage(data.avatar), 0, 0, W, H);
+    ctx.drawImage(getImage(avatar), 0, 0, W, H);
 
     return {
         dataURL: canvas.toDataURL("image/jpeg"),
