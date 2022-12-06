@@ -40,12 +40,14 @@ export class ShareableController extends EightController {
     @action("post")
     public async postDataShareable(
         @query("type", joi.string()) type: string,
-        @body body: any) {
+        @body body: string) {
+
+        return JSON.parse(body);
 
         if (!body || !body.userData) {
             throw new Error();
         }
-        
+
         return body;
 
         let resData = body.resData;
