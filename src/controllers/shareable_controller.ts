@@ -42,6 +42,10 @@ export class ShareableController extends EightController {
         @query("type", joi.string()) type: string,
         @body body: any) {
 
+        if (!body || !body.userData) {
+            throw new Error();
+        }
+        
         return body;
 
         let resData = body.resData;
