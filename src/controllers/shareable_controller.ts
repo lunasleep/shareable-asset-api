@@ -50,6 +50,8 @@ export class ShareableController extends EightController {
 
         const avatar = resData.avatar;
 
+        return resData;
+
 
         if (type === "avatar") {
             return await createEOYAvatarShareable(avatar);
