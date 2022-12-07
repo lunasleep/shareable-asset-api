@@ -34,13 +34,14 @@ export function createExpressApp(logger: Logger = new DummyLogger()) {
         }
 
         const avatar = resData.Avatar;
+        const sfs = resData["avg_sfs_score"];
 
         const type = req.query.type;
         let response: {};
         if (type === "avatar") {
             response = await createEOYAvatarShareable(avatar);
         } else {
-            response = await createEOYRecapShareable(avatar);
+            response = await createEOYRecapShareable(avatar, sfs);
         }
 
         res.send(JSON.stringify(response));

@@ -4,6 +4,8 @@ import { Canvas, CanvasRenderingContext2D, createCanvas, Image, loadImage, regis
 const W = 1080;
 const H = 1920;
 
+registerFont("assets/spaced.ttf", {family: "Spaced"});
+
 const images: { cosmic: Image | undefined; deep: Image | undefined; spacewalker: Image | undefined; supernova: Image | undefined; stellar: Image | undefined; newmoon: Image | undefined; ice: Image | undefined; nobuzz: Image | undefined; galaxy: Image | undefined } = {
     cosmic: undefined,
     deep: undefined,
@@ -51,7 +53,7 @@ const getImage = (avatarName: string) => {
     return images.spacewalker;
 };
 
-export const createEOYRecapShareable =  async (avatar: string) => {
+export const createEOYRecapShareable =  async (avatar: string, sfs: number) => {
     const canvas = createCanvas(W, H);
     const ctx = canvas.getContext("2d");
 
@@ -60,6 +62,15 @@ export const createEOYRecapShareable =  async (avatar: string) => {
     }
 
     ctx.drawImage(getImage(avatar), 0, 0, W, H);
+
+    const gradient = ctx.createLinearGradient(20, 0, 220, 0);
+    gradient.addColorStop(0, "green");
+    gradient.addColorStop(0.5, "cyan");
+    gradient.addColorStop(1, "green");
+
+    ctx.font = `64px "Spaced"`;
+    ctx.fillStyle = gradient;
+    ctx.fillText(sfs.toString(), 626, 820);
 
     return {
         dataURL: canvas.toDataURL("image/jpeg"),
