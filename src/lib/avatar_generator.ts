@@ -45,6 +45,8 @@ const getImage = (avatarName: string) => {
             return images.galaxy;
         case "Stellar Sleeper":
             return images.stellar;
+        case "No Buzz Aldrin":
+            return images.nobuzz;
     }
 
     return images.spacewalker;
