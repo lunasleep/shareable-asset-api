@@ -63,14 +63,13 @@ export const createEOYRecapShareable =  async (avatar: string, sfs: number) => {
 
     ctx.drawImage(getImage(avatar), 0, 0, W, H);
 
-    const gradient = ctx.createLinearGradient(20, 0, 220, 0);
-    gradient.addColorStop(0, "green");
-    gradient.addColorStop(0.5, "cyan");
-    gradient.addColorStop(1, "green");
+    const gradient = ctx.createLinearGradient(686, 880, 686 + 113, 880 + 70);
+    gradient.addColorStop(0, "#338BC2");
+    gradient.addColorStop(1, "#DFFEE6");
 
     ctx.font = `64px "Spaced"`;
     ctx.fillStyle = gradient;
-    ctx.fillText(sfs.toString(), 626, 820);
+    ctx.fillText(sfs.toString(), 686, 880);
 
     return {
         dataURL: canvas.toDataURL("image/jpeg"),
