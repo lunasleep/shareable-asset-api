@@ -150,8 +150,8 @@ export const createEOYRecapShareable =  async (avatar: string, sfs: number, high
     drawGradientText(ctx, 557, 1260, (highestSFS === 100 ? 167 : 113), 100, 92, highestSFS.toString());
     drawGradientText(ctx, 557, 1424, (lowestSFS === 100 ? 167 : 101), 100, 92, lowestSFS.toString());
     drawGradientText(ctx, 557, 1594, (num100s === 100 ? 167 : 101), 100, 92, num100s.toString());
-    drawColorText(ctx, 809, 855, 24, "AVERAGE" , "white");
-    drawColorText(ctx, 809, 875, 24, "SLEEP SCORE" , "white");
+    drawColorText(ctx, 809, 852, 24, "AVERAGE" , "white");
+    drawColorText(ctx, 809, 878, 24, "SLEEP SCORE" , "white");
     drawRect(ctx, (highestSFS === 100 ? 762 : 714), 1196, (highestDate.length > 5 ? 139 : 112), 53, "#1A1A1A");
     drawRect(ctx, (lowestSFS === 100 ? 762 : 714), 1365, (lowestDate.length > 5 ? 139 : 112), 53, "#1A1A1A");
     drawColorText(ctx, (highestSFS === 100 ? 773 : 725), 1234, 36, highestDate, "#BABABA");
