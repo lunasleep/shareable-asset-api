@@ -36,15 +36,15 @@ const getImage = (avatarName: string) => {
         case "Supernova":
             return images.supernova;
         case "Spacewalker":
-            return images.supernova;
+            return images.spacewalker;
         case "Deep Space Dreamer":
-            return images.supernova;
+            return images.deep;
         case "Ice Nebula":
-            return images.supernova;
+            return images.ice;
         case "The Galaxy Great":
-            return images.supernova;
+            return images.galaxy;
         case "Stellar Sleeper":
-            return images.supernova;
+            return images.stellar;
     }
 
     return images.spacewalker;
