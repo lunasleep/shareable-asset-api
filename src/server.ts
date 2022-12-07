@@ -35,13 +35,19 @@ export function createExpressApp(logger: Logger = new DummyLogger()) {
 
         const avatar = resData.Avatar;
         const sfs = resData["avg_sfs_score"];
+        const highestSFS = resData["highest_sfs_score"];
+        const lowestSFS = resData["lowest_sfs_score"];
+        const num100s = resData["total_100_sfs_score"];
+        const temps = resData["temp_settings_overall"];
+        const highestDate = new Date(`${resData["lowest_sfs_score_date"]}T00:00:00`).toLocaleString("default", { month: "short", day: "numeric" });
+        const lowestDate = new Date(`${resData["highest_sfs_score_date"]}T00:00:00`).toLocaleString("default", { month: "short", day: "numeric" });
 
         const type = req.query.type;
         let response: {};
         if (type === "avatar") {
             response = await createEOYAvatarShareable(avatar);
         } else {
-            response = await createEOYRecapShareable(avatar, sfs);
+            response = await createEOYRecapShareable(avatar, sfs, highestSFS, lowestSFS, num100s, highestDate, lowestDate, temps);
         }
 
         res.send(JSON.stringify(response));
