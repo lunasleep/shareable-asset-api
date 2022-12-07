@@ -31,15 +31,18 @@ export function createExpressApp(logger: Logger = new DummyLogger()) {
             body = JSON.parse(req.body);
         } catch (e) {
             res.status(400);
+            res.send(e);
             return;
         }
 
-        if (!body) {
+        if (!body || !body.userData || !body.userData.userId) {
             res.status(400);
+            res.send({});
             return;
         }
 
         let resData = body.resData;
+
 
         if (!resData || !resData.Avatar) {
             resData = await fetch(`https://i.eight.sl/eoy-lifeboat?uid=${body.userData.userId}`).then((r: { json: () => any; }) => r.json());
@@ -66,6 +69,7 @@ export function createExpressApp(logger: Logger = new DummyLogger()) {
             res.send(JSON.stringify(response));
         } catch (e) {
             res.status(400);
+            res.send(e);
         }
     });
 
