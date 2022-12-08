@@ -187,27 +187,27 @@ const getNumberColor = (number: number) => {
         return "#1862ff";
     }
 
-    if (number <= -6) {
+    if (number <= -5) {
         return "#304bf6";
     }
 
-    if (number <= -4) {
+    if (number <= -3) {
         return "#3744f3";
     }
 
-    if (number <= -2) {
+    if (number < 0) {
         return "#4c39f2";
     }
 
-    if (number <= 1) {
+    if (number === 0) {
         return "#832ef5";
     }
 
-    if (number <= 3) {
+    if (number <= 2) {
         return "#b91332";
     }
 
-    if (number <= 5) {
+    if (number <= 4) {
         return "#c31435";
     }
 
