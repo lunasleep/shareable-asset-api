@@ -1,3 +1,6 @@
+// needs to be loaded before any other modules
+require("@eight/logging/enable-tracing");
+
 import fetch from "node-fetch";
 import * as config from "config";
 import * as express from "express";
@@ -7,8 +10,6 @@ import { DummyLogger, Logger, Logging } from "@eight/logging";
 import { ShareableController } from "./controllers/shareable_controller";
 import { createEOYAvatarShareable } from "./lib/avatar_generator";
 import { createEOYRecapShareable } from "./lib/recap_generator";
-
-require("@eight/logging/enable-tracing");
 
 @controller("")
 class RootController extends EightController {
